@@ -1,0 +1,16 @@
+{
+  "name": "parcel-plugin-wrapper",
+  "version": "0.0.1",
+  "description": "Parcel plugin that wraps output files (chunks) with custom text or code.",
+  "main": "index.js",
+  "keywords": [
+    "parcel"
+  ],
+  "repository": "https://github.com/albinotonnina/parcel-plugin-wrapper.git",
+  "author": "Albino Tonnina <albinotonnina@gmail.com>",
+  "license": "MIT",
+  "peerDependencies": {
+    "parcel-bundler": "^1.1.0"
+  },
+  "dependencies": {}
+}
