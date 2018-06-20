@@ -6,11 +6,30 @@
   "keywords": [
     "parcel"
   ],
+  "scripts": {
+    "test": "jest"
+  },
   "repository": "https://github.com/albinotonnina/parcel-plugin-wrapper.git",
   "author": "Albino Tonnina <albinotonnina@gmail.com>",
   "license": "MIT",
   "peerDependencies": {
     "parcel-bundler": "^1.1.0"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "devDependencies": {
+    "jest": "^23.1.0",
+    "parcel-assert-bundle-tree": "^1.0.0",
+    "parcel-bundler": "^1.9.2"
+  },
+  "jest": {
+    "coverageDirectory": "./coverage/",
+    "collectCoverage": true,
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "./src/tests/"
+    ],
+    "moduleNameMapper": {
+      ".assetWrapper.js$": "<rootDir>/tests/mockAssetWrapper.js"
+    }
+  }
 }

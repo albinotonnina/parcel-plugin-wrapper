@@ -1,0 +1,1 @@
+{"version":3,"sources":["file.js"],"names":["hey"],"mappings":";AACeA,aAAAA,OAAAA,eAAAA,QAAAA,cAAAA,OAAAA,IADf,IAAMA,EAAM,OACGA,QAAAA,QAAAA","file":"file.map","sourceRoot":"..","sourcesContent":["const hey = 'jude'\nexport default hey\n"]}

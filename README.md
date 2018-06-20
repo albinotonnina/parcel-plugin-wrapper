@@ -4,6 +4,8 @@
 
 Tiny Parcel plugin that wraps output files with custom text or code.
 
+This plugins imitates pretty much what [wrapper-webpack-plugin](https://github.com/levp/wrapper-webpack-plugin) does.
+
 ## Install
 
 ```
