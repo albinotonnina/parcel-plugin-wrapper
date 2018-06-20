@@ -1,25 +1,51 @@
 const path = require('path')
+const fs = require('fs')
 const logger = require('parcel-bundler/src/Logger')
 
 module.exports = function(bundler) {
-  const processAsset = (bundle, publicURL) => {
-    let output = path.join(publicURL, path.basename(bundle.name))
-    let input = bundle.entryAsset
-      ? bundle.entryAsset.basename
-      : bundle.assets.values().next().value.basename
+  const readAsset = path => {
+    try {
+      return fs.readFileSync(path, 'utf8')
+    } catch (e) {
+      logger.error('file is invalid')
+      throw e
+    }
+  }
 
-    console.log('input', input)
-    console.log('output', output)
+  const writeAsset = (name, {header = '', footer = ''}) => {
+    fs.writeFileSync(
+      name,
+      `${header}
+${readAsset(name)}
+${footer}`
+    )
+  }
+
+  const processAsset = async (bundle, publicURL, processFn) => {
+    const {name} = bundle
+    const wrappingCode = await processFn({name, bundler})
+
+    if (wrappingCode) {
+      writeAsset(name, wrappingCode)
+    }
 
     bundle.childBundles.forEach(function(bundle) {
-      processAsset(bundle, publicURL)
+      processAsset(bundle, publicURL, processFn)
     })
   }
 
-  bundler.on('bundled', bundle => {
-    const publicURL = bundle.entryAsset.options.publicURL
-
-    logger.status('start')
-    processAsset(bundle, publicURL)
+  bundler.on('bundled', async bundle => {
+    try {
+      const CWD = process.cwd()
+      const processFn = require(path.join(CWD, '.assetWrapper.js'))
+      if (processFn && typeof processFn === 'function') {
+        const publicURL = bundle.entryAsset.options.publicURL
+        await processAsset(bundle, publicURL, processFn)
+      }
+    } catch (error) {
+      logger.warn(
+        'parcel-plugin-wrapper cannot work without a .assetWrapper.js in the root of your project!'
+      )
+    }
   })
 }
