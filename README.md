@@ -1,6 +1,7 @@
 # parcel-plugin-wrapper
 
 [![Build Status](https://travis-ci.org/albinotonnina/parcel-plugin-wrapper.svg?branch=master)](https://travis-ci.org/albinotonnina/parcel-plugin-wrapper)
+[![codecov](https://codecov.io/gh/albinotonnina/parcel-plugin-wrapper/branch/master/graph/badge.svg)](https://codecov.io/gh/albinotonnina/parcel-plugin-wrapper)
 
 ## Q:What is this thing solving?
 
