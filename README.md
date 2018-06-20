@@ -14,17 +14,48 @@ yarn add parcel-plugin-wrapper --dev
 
 Create a `.assetWrapper.js` file in the root folder of your project.
 
-example:
+#### Example 1, add some data coming from package.json:
 
 ```javascript
-const yourAssetProcess = async ({name, bundler}) => {
-  //name = app.ere76r5e76r5e76r.js
-  //bundler.options.production = true/false
+const path = require('path')
 
+const CWD = process.cwd()
+const PACKAGE = require(path.join(CWD, 'package.json'))
+
+const yourAssetProcess = async ({name, bundler}) => {
+  // name = app.ere76r5e76r5e76r.js
   if (name.split('.').pop() === 'js' && bundler.options.production) {
     return {
       header: `/* ${PACKAGE.name} - ${PACKAGE.version} */`,
       footer: `// The End.`
+    }
+  }
+}
+
+module.exports = yourAssetProcess
+```
+
+#### Will output:
+
+```javascript
+/* your-project - 3.4.56 */
+parcelRequire=function(e,r,n,t){var i="function"==typeof parcelRequire.etc.etc.etc...
+[...bla]
+[...bla]
+[...bla]
+// The End
+```
+
+#### Example 2, Wraps bundle files with '.js' extension in a self invoking function and enables strict mode:
+
+```javascript
+const path = require('path')
+
+const yourAssetProcess = ({name, bundler}) => {
+  if (name.split('.').pop() === 'js' && bundler.options.production) {
+    return {
+      header: '(function () { "use strict";\n',
+      footer: '\n})();'
     }
   }
 }
