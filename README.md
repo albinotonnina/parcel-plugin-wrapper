@@ -1,5 +1,7 @@
 # parcel-plugin-wrapper
 
+[![Build Status](https://travis-ci.org/albinotonnina/parcel-plugin-wrapper.svg?branch=master)](https://travis-ci.org/albinotonnina/parcel-plugin-wrapper)
+
 ## Q:What is this thing solving?
 
 Tiny Parcel plugin that wraps output files with custom text or code.
