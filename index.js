@@ -21,7 +21,7 @@ ${footer}`
     )
   }
 
-  const processAsset = async (bundle, publicURL, processFn) => {
+  const processAsset = async (bundle, processFn) => {
     const {name} = bundle
     const wrappingCode = await processFn({name, bundler})
 
@@ -30,7 +30,7 @@ ${footer}`
     }
 
     bundle.childBundles.forEach(function(bundle) {
-      processAsset(bundle, publicURL, processFn)
+      processAsset(bundle, processFn)
     })
   }
 
@@ -39,8 +39,7 @@ ${footer}`
       const CWD = process.cwd()
       const processFn = require(path.join(CWD, '.assetWrapper.js'))
       if (processFn && typeof processFn === 'function') {
-        const publicURL = bundle.entryAsset.options.publicURL
-        await processAsset(bundle, publicURL, processFn)
+        await processAsset(bundle, processFn)
       }
     } catch (error) {
       logger.warn(
