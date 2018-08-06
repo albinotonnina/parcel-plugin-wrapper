@@ -56,4 +56,38 @@ describe('Asset', () => {
     },
     25000
   )
+
+  it(
+    'should work with multiple entry points',
+    async () => {
+      // Init bundler
+      const bundler = new Bundler(
+        [path.join(__dirname, './file.js'), path.join(__dirname, './file2.js')],
+        {
+          outDir: path.join(__dirname, 'dist'),
+          production: true,
+          watch: false,
+          cache: false,
+          hmr: false,
+          logLevel: 0
+        }
+      )
+      // Register plugin
+      wrapperPlugin(bundler)
+
+      // Bundle everything
+      await bundler.bundle()
+
+      //   Check asset content
+      const filename = path.join(__dirname, './dist/file.js')
+      const fileContent = (await readFile(filename)).toString()
+      const fileLines = fileContent.split('\n')
+      const firstLine = fileLines[0]
+      const lastLine = fileLines[fileLines.length - 1]
+
+      expect(firstLine).toMatch('/* parcel-plugin-wrapper - 0.1.0 */')
+      expect(lastLine).toMatch('The End')
+    },
+    25000
+  )
 })
