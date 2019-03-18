@@ -38,7 +38,7 @@ describe('Asset', () => {
       })
 
       const expected = [
-        expect.stringContaining('/* parcel-plugin-wrapper - 0.1.0 */'),
+        expect.stringContaining('/* parcel-plugin-wrapper - 0.2.0 */'),
         expect.stringContaining('// The End')
       ]
 
@@ -49,7 +49,7 @@ describe('Asset', () => {
         bundleFoot: fileContent
       }).toEqual({
         bundleHead: expect.stringContaining(
-          '/* parcel-plugin-wrapper - 0.1.0 */'
+          '/* parcel-plugin-wrapper - 0.2.0 */'
         ),
         bundleFoot: expect.stringContaining('The End')
       })
@@ -85,7 +85,7 @@ describe('Asset', () => {
       const firstLine = fileLines[0]
       const lastLine = fileLines[fileLines.length - 1]
 
-      expect(firstLine).toMatch('/* parcel-plugin-wrapper - 0.1.0 */')
+      expect(firstLine).toMatch('/* parcel-plugin-wrapper - 0.2.0 */')
       expect(lastLine).toMatch('The End')
     },
     25000

@@ -1,6 +1,6 @@
 const path = require('path')
 const fs = require('fs')
-const logger = require('parcel-bundler/src/Logger')
+const logger = require('@parcel/logger')
 
 module.exports = function(bundler) {
   const readAsset = path => {
