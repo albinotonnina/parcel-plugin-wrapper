@@ -1,6 +1,6 @@
 {
   "name": "parcel-plugin-wrapper",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Parcel plugin that wraps output files with custom text or code.",
   "main": "index.js",
   "keywords": [
@@ -13,7 +13,7 @@
   "author": "Albino Tonnina <albinotonnina@gmail.com>",
   "license": "MIT",
   "peerDependencies": {
-    "parcel-bundler": "^1.1.0"
+    "parcel-bundler": "^1.11.0"
   },
   "dependencies": {},
   "devDependencies": {
