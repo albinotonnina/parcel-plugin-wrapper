@@ -23,13 +23,16 @@ ${footer}`
 
   const processAsset = async (bundle, processFn) => {
     const {name} = bundle
-    const wrappingCode = await processFn({name, bundler})
 
-    if (wrappingCode) {
-      writeAsset(name, wrappingCode)
+    if (name !== undefined) {
+      const wrappingCode = await processFn({name, bundler})
+
+      if (wrappingCode) {
+        writeAsset(name, wrappingCode)
+      }
     }
 
-    bundle.childBundles.forEach(function(bundle) {
+    bundle.childBundles.forEach((bundle) => {
       processAsset(bundle, processFn)
     })
   }
